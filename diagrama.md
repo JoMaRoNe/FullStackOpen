@@ -3,14 +3,15 @@ sequenceDiagram
     participant browser
     participant server
 
+    Note right of browser: The user writes a new note and press the button
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    server-->>browser: The server asks the browser to do a new HTTP GET request to the address defined in the header's Location - the address notes.
+    server-->>browser: The server add the new note and asks the browser to do a new HTTP GET request.
+    deactivate server
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
     server-->>browser: HTML document
     deactivate server
-
-Note left of server: The server asks the browser to do a new HTTP GET request to the address defined in the header's Location - the address notes.
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
