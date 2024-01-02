@@ -5,8 +5,12 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
+    server-->>browser: The server asks the browser to do a new HTTP GET request to the address defined in the header's Location - the address notes.
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     server-->>browser: HTML document
     deactivate server
+
+Note left of server: The server asks the browser to do a new HTTP GET request to the address defined in the header's Location - the address notes.
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
