@@ -1,5 +1,14 @@
 import { useState } from 'react'
 
+const getRadom = () => {
+  let number = (Math.floor(Math.random()* 8))
+  //console.log('Numero generado: ', number)
+  return (
+    number
+    )
+  }
+
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -17,6 +26,9 @@ const App = () => {
   return (
     <div>
       {anecdotes[selected]}
+      <div>
+        <button onClick={() => setSelected(getRadom)}>Next anecdote</button>
+      </div>
     </div>
   )
 }
