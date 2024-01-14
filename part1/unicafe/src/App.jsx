@@ -16,13 +16,16 @@ function App() {
         <h2>give feedback</h2>
         <button onClick={() => setGood(good + 1)}>Good</button>
         <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
-        <button onClick={() => setBad(bad + 1)}>Good</button>
+        <button onClick={() => setBad(bad + 1)}>Bad</button>
       </div>
       <div>
         <h2>statistics</h2>
         <div>good {good}</div>
         <div>neutral {neutral}</div>
         <div>bad {bad}</div>
+        <div>total {good + neutral + bad} </div>
+        <div>average {(good - bad) / (good + neutral + bad) }</div>
+        <div>positive {good / (good + neutral + bad) * 100 }%</div>
       </div>
     </div>
   )
