@@ -1,34 +1,31 @@
 import { useState } from 'react'
 
+const Button = ({onSmash, text}) => <button onClick={onSmash}>{text}</button>
+
+const StatisticLine = ({text, value}) => <div>{text} {value}</div>
+
 const Statistics = ({good,neutral,bad}) => {
   const total = good + neutral + bad
   const average = (good - bad) / total
-  const positive = good / total * 100
+  const positive = (good / total * 100) + '%'
 
-  if (total === 0) { 
+  if (total === 0) {
     return (
-      <div>
-        <h2>statistics</h2>
-        <div>No feedback given</div>
-      </div>
+      <div>No feedback given</div>
     )
   }
-
+  
   return (
     <div>
-    <h2>statistics</h2>
-    <div>good {good}</div>
-    <div>neutral {neutral}</div>
-    <div>bad {bad}</div>
-    <div>total {total} </div>
-    <div>average { average }</div>
-    <div>positive { positive }%</div>
-  </div>
+      <StatisticLine text='good' value={good} />
+      <StatisticLine text='neutral' value={neutral} />
+      <StatisticLine text='bad' value={bad} />
+      <StatisticLine text='total' value={total} />
+      <StatisticLine text='average' value={average}/>
+      <StatisticLine text='positive' value={positive} />
+    </div>
   )
 }
-//const Display = ({counter, text}) => <div>{text} {counter}</div>
-
-//const Button = ({onSmash, text}) => <button onClick={onSmash}>{text}</button>
 
 function App() {
   // guarda los clics de cada botón en su propio estado
@@ -40,11 +37,14 @@ function App() {
     <div>
       <div>
         <h2>give feedback</h2>
-        <button onClick={() => setGood(good + 1)}>Good</button>
-        <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
-        <button onClick={() => setBad(bad + 1)}>Bad</button>
+        <Button onSmash={() => setGood(good + 1)} text='Good' />
+        <Button onSmash={() => setNeutral(neutral + 1)} text='Neutral'/>
+        <Button onSmash={() => setBad(bad + 1)} text='Bad' />
       </div>
-      <Statistics good={good} neutral={neutral} bad={bad} />
+      <div>
+        <h2>statistics</h2>
+        <Statistics good={good} neutral={neutral} bad={bad} />
+      </div>
     </div>
   )
 }
