@@ -2,8 +2,15 @@ import { useState } from 'react'
 
 const Button = ({onSmash, text}) => <button onClick={onSmash}>{text}</button>
 
-const StatisticLine = ({text, value}) => <div>{text} {value}</div>
-
+const StatisticLine = ({text, value}) => {
+  
+    return (
+      <tr>
+        <td>{text}</td>
+        <td>{value}</td>
+      </tr>
+    )
+}
 const Statistics = ({good,neutral,bad}) => {
   const total = good + neutral + bad
   const average = (good - bad) / total
@@ -16,14 +23,16 @@ const Statistics = ({good,neutral,bad}) => {
   }
   
   return (
-    <div>
-      <StatisticLine text='good' value={good} />
-      <StatisticLine text='neutral' value={neutral} />
-      <StatisticLine text='bad' value={bad} />
-      <StatisticLine text='total' value={total} />
-      <StatisticLine text='average' value={average}/>
-      <StatisticLine text='positive' value={positive} />
-    </div>
+    <table>
+      <tbody>
+        <StatisticLine text='good' value={good} />
+        <StatisticLine text='neutral' value={neutral} />
+        <StatisticLine text='bad' value={bad} />
+        <StatisticLine text='total' value={total} />
+        <StatisticLine text='average' value={average}/>
+        <StatisticLine text='positive' value={positive} />
+      </tbody>
+    </table>
   )
 }
 
