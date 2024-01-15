@@ -1,6 +1,6 @@
-# Exercise 1.12 - 1.15 - Anecdotes #
+# Exercise 1.12 - 1.14 - Anecdotes #
 
-## Step 1 ##
+## 1.12: anecdotes step 1 ##
 
 The world of software engineering is filled with anecdotes that distill timeless truths from our field into short one-liners.
 

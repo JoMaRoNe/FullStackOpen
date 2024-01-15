@@ -28,15 +28,27 @@ const App = () => {
     setPoint(copy)
   }  
 
-  console.log('Cita:', selected)
-  console.log('Puntos:', points)
+  const mostVoted = ({points}) => {
+    const most = [...points]
+    most.sort((a,b) => a - b)
+    const ind = points.indexOf(most[most.length - 1])
+    return (
+      ind
+    )
+  }
+  
+  const most = mostVoted({points})
 
   return (
     <div>
+      <h2>Anecdote of the day</h2>
       {anecdotes[selected]}
       <Div points={points} selected={selected} />
       <Button onSmash={onVotes} text='Vote' />
       <Button onSmash={() => setSelected(rnd)} text='Next anecdote' />
+      <h2>Anecdote with most votes</h2>
+      {anecdotes[most]}
+      <Div points={points} selected={most} />
     </div>
   )
 }
