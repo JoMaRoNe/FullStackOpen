@@ -1,13 +1,8 @@
 import { useState } from 'react'
 
-const getRadom = () => {
-  let number = (Math.floor(Math.random()* 8))
-  //console.log('Numero generado: ', number)
-  return (
-    number
-    )
-  }
+const Button = ({onSmash, text}) => <button onClick={onSmash}>{text}</button>
 
+const Div = ({points, selected}) => <div>Has {points[selected]} votes</div>
 
 const App = () => {
   const anecdotes = [
@@ -20,15 +15,28 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+  
+  const rnd = Math.floor(Math.random()* anecdotes.length)
 
   const [selected, setSelected] = useState(0)
+
+  const [points, setPoint] = useState([0, 0, 0, 0, 0, 0, 0, 0])
+ 
+  const onVotes = () => {
+    const copy = [...points]
+    copy[selected] += 1
+    setPoint(copy)
+  }  
+
+  console.log('Cita:', selected)
+  console.log('Puntos:', points)
 
   return (
     <div>
       {anecdotes[selected]}
-      <div>
-        <button onClick={() => setSelected(getRadom)}>Next anecdote</button>
-      </div>
+      <Div points={points} selected={selected} />
+      <Button onSmash={onVotes} text='Vote' />
+      <Button onSmash={() => setSelected(rnd)} text='Next anecdote' />
     </div>
   )
 }
