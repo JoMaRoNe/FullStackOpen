@@ -1,3 +1,16 @@
+const Curso = ({course}) => {
+  console.log("curso:", course);
+  return (
+    <div>
+      {course.map((c, i) => (
+        <div>
+          <h1>{c.name}</h1>
+          <p>{c.parts.name} {c.parts.exercises}</p>
+        </div>
+      ))} 
+    </div>
+  )
+}
 
 const App = () => {
   const course = {
@@ -22,8 +35,10 @@ const App = () => {
     ],
   }
 
-  return <Course course={course} />
+  return <Curso course={course} />
 }
+
+export default App
 
 /*
 const Header = (props) => {
@@ -88,4 +103,3 @@ const App = () => {
   )
 }
 */
-export default App
