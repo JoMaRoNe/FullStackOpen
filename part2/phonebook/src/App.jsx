@@ -70,7 +70,7 @@ const App = () => {
       <h2>Numbers</h2>
       <div>
         {personsToShow.map(person => 
-          <Person key={person.name}  person={person} search={newSearch}/>
+          <Person key={person.name}  person={person}/>
         )}
       </div>
     </div>
