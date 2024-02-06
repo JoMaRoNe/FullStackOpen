@@ -13,7 +13,7 @@ Comencemos por implementar la adición de una persona a la agenda.
 
 Puedes utilizar el siguiente código como punto de partida para el componente App de tu aplicación:
 
-```
+```jsx
 import { useState } from 'react'
 
 const App = () => {
@@ -45,7 +45,7 @@ El estado de `newName` está destinado a controlar el elemento input del formula
 
 A veces puede resultar útil representar el estado y otras variables como texto con fines de depuración. Puedes agregar temporalmente el siguiente elemento al componente renderizado:
 
-```
+```jsx
 <div>debug: {newName}</div>
 ```
 
@@ -73,19 +73,19 @@ Emite una advertencia con el comando [alert](https://developer.mozilla.org/es/do
 
 **Sugerencia:** cuando estés formando cadenas que contienen valores de variables, se recomienda utilizar una [plantilla de cadena](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals):
 
-```
+```jsx
 `${newName} is already added to phonebook`
 ```
 
 Si la variable `newName` tiene el valor *Arto Hellas*, la expresión de la plantilla de cadena regresa la cadena
 
-```
+```jsx
 `Arto Hellas is already added to phonebook`
 ```
 
 Lo mismo se podría hacer en una forma más similar a Java usando el operador de sumar:
 
-```
+```jsx
 newName + ' is already added to phonebook'
 ```
 
@@ -96,7 +96,7 @@ Usar plantillas de cadenas es la opción más idiomática y el signo de un verda
 
 Amplía tu aplicación permitiendo a los usuarios agregar números de teléfono a la agenda telefónica. Deberás agregar un segundo elemento input al formulario (junto con su propio controlador de eventos):
 
-```
+```jsx
 <form>
   <div>name: <input /></div>
   <div>number: <input /></div>
@@ -119,7 +119,7 @@ Puedes implementar el campo de búsqueda como un elemento *input* que se coloca 
 
 **NB:** Cuando trabajes en una nueva funcionalidad, a menudo es útil "codificar" algunos datos ficticios en tu aplicación, por ejemplo
 
-```
+```jsx
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456', id: 1 },
@@ -143,7 +143,7 @@ Es suficiente extraer tres componentes de la aplicación. Buenos candidatos para
 
 El componente raíz de la aplicación podría verse similar a esto después de la refactorización. El componente raíz refactorizado a continuación solo representa los títulos y permite que los componentes extraídos se encarguen del resto.
 
-```
+```jsx
 const App = () => {
   // ...
 
