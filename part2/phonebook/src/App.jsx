@@ -24,8 +24,22 @@ const App = () => {
         number: newNumber
       }
 
+      const changePerson = (id) => {
+        const person = persons.find(p => p.id === id)
+        const changedPerson = { ...person, number: newNumber }
+        personService
+        .update(id,changedPerson)
+        .then(returnedPerson => {
+          setPersons(persons.map(p => p.id === id ? returnedPerson : p))
+          setNewName('')
+          setNewNumber('')
+        }) 
+      }
+
       persons.some(person => person.name === newName)
-        ? alert(`${newName} is already added to phonebook`)
+        ? window.confirm(`${newName} is already added to phonebook, replace old number with a new one?`)
+          ? changePerson(persons.find(person => person.name === newName).id)
+          : console.log('Cancelled')
         : personService
             .create(personObject)
             .then(returnedPerson => {
