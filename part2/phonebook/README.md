@@ -109,7 +109,7 @@ En este punto, la aplicación podría verse así. La imagen también muestra el 
 ![Imagen ejercicio 2.8](./public/12e.png)
 
 
-**2.9*: La Agenda Telefónica Paso 4**
+**2.9\*: La Agenda Telefónica Paso 4**
 
 Implementa un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
@@ -197,7 +197,7 @@ const delete = (id) => {
   // ...
 }
 ```
-**2.15*: La Agenda Telefónica paso 10**
+**2.15\*: La Agenda Telefónica paso 10**
 
 *¿Por qué hay un asterisco en el ejercicio? Consulta [aquí](https://fullstackopen.com/es/part0/informacion_general#tomando-el-curso) para obtener la explicación.*
 
