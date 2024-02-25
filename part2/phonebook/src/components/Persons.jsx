@@ -1,16 +1,19 @@
-import Person from "./Person"
-
-const Persons = ({persons, search}) => {
+const Persons = ({persons, search, handle}) => {
     
     const personsToShow = search
     ? persons.filter((p) => p.name.toLowerCase().includes(search.toLowerCase()))
     : persons
-    
+
     return (
         <div>
-        {personsToShow.map(person => 
-        <Person key={person.name}  person={person}/>
-        )}
+            {personsToShow.map(person => 
+                <p key={person.id}>
+                    {person.name} {person.number} 
+                    <button onClick={() =>handle(person.name, person.id)}>
+                        delete
+                    </button>
+                </p>
+            )}
         </div>
     )
 }

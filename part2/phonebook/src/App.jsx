@@ -19,7 +19,7 @@ const App = () => {
 
   const addPerson = (event) => {
       event.preventDefault ()
-      const notePerson = {
+      const personObject = {
         name: newName,
         number: newNumber
       }
@@ -27,13 +27,18 @@ const App = () => {
       persons.some(person => person.name === newName)
         ? alert(`${newName} is already added to phonebook`)
         : personService
-            .create(notePerson)
+            .create(personObject)
             .then(returnedPerson => {
               setPersons(persons.concat(returnedPerson))
               setNewName('')
               setNewNumber('')
             })
   }
+
+  const removePerson = (id) => {
+      personService.remove(id)
+      setPersons(persons.filter((p) => p.id != id))
+    }
 
   const handlePersonChange = (event) => {
       setNewName(event.target.value)
@@ -46,6 +51,12 @@ const App = () => {
   
   const handleSearchChange = (event) => {
     setNewSearch(event.target.value)
+  }
+
+  const handleClick = (name, id) => {
+    const r = window.confirm(`Delete ${name}?`)
+        ? removePerson(id)
+        : console.log("cancelled")
   }
 
   return (
@@ -61,7 +72,7 @@ const App = () => {
         handleN={handleNumberChange}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} search={newSearch}/>
+      <Persons persons={persons} search={newSearch} handle={handleClick}/>
     </div>
   )
 }
