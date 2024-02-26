@@ -8,7 +8,7 @@ const App = () => {
   const [persons, setPersons] = useState([])  
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
-  const [notification, setNotification] = useState('')
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
     personService
@@ -16,11 +16,18 @@ const App = () => {
       .then(initalPersons => {
         setPersons(initalPersons)
       })
+
   }, [])
 
   const Notification = ({message}) => {
+    if (message === null) {
+      return null
+    }
+    
+    const setColor = message.includes('removed') ? 'red' : 'green'
+    
     const notificationStyle = {
-      color: 'green',
+      color: setColor,
       fontSize: 20,
       borderStyle: 'solid',
       borderRadius: 5,
@@ -28,16 +35,13 @@ const App = () => {
       marginBottom: 10
     }
 
-    if (message === null) {
-      return null
-    } 
-
     return (
       <div style={notificationStyle}>
         {message}
       </div>
     )
   }
+
 
   const addPerson = (event) => {
       event.preventDefault ()
@@ -59,6 +63,13 @@ const App = () => {
           setTimeout (() => {
             setNotification(null)
           },5000)
+        })
+        .catch(error => {
+          setNotification(`Information of ${changedPerson.name} has already been removed from server`)
+          setTimeout (() => {
+            setNotification(null)
+          },5000)
+          setPersons(persons.filter((p) => p.id != id))
         }) 
       }
 
@@ -79,11 +90,17 @@ const App = () => {
             },5000)
   }
 
-  const removePerson = (id) => {
+
+  const removePerson = (name,id) => {
       personService.remove(id)
       setPersons(persons.filter((p) => p.id != id))
+      setNotification(`Deleted ${name}.`)
+      setTimeout (() => { 
+        setNotification(null)
+      },5000)
     }
 
+    
   const handlePersonChange = (event) => {
       setNewName(event.target.value)
   }
@@ -99,7 +116,7 @@ const App = () => {
 
   const handleClick = (name, id) => {
     const r = window.confirm(`Delete ${name}?`)
-        ? removePerson(id)
+        ? removePerson(name,id)
         : console.log("cancelled")
   }
 
