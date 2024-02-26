@@ -8,6 +8,7 @@ const App = () => {
   const [persons, setPersons] = useState([])  
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
+  const [notification, setNotification] = useState('')
 
   useEffect(() => {
     personService
@@ -16,6 +17,27 @@ const App = () => {
         setPersons(initalPersons)
       })
   }, [])
+
+  const Notification = ({message}) => {
+    const notificationStyle = {
+      color: 'green',
+      fontSize: 20,
+      borderStyle: 'solid',
+      borderRadius: 5,
+      padding: 10,
+      marginBottom: 10
+    }
+
+    if (message === null) {
+      return null
+    } 
+
+    return (
+      <div style={notificationStyle}>
+        {message}
+      </div>
+    )
+  }
 
   const addPerson = (event) => {
       event.preventDefault ()
@@ -33,6 +55,10 @@ const App = () => {
           setPersons(persons.map(p => p.id === id ? returnedPerson : p))
           setNewName('')
           setNewNumber('')
+          setNotification (`${person.name} has been modified.`)
+          setTimeout (() => {
+            setNotification(null)
+          },5000)
         }) 
       }
 
@@ -47,6 +73,10 @@ const App = () => {
               setNewName('')
               setNewNumber('')
             })
+            setNotification(`Added ${personObject.name}`)
+            setTimeout (() => { 
+              setNotification(null)
+            },5000)
   }
 
   const removePerson = (id) => {
@@ -76,6 +106,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={notification} />
       <Filter search={newSearch} handle={handleSearchChange} />
       <h3>add a new</h3>
       <PersonForm 
