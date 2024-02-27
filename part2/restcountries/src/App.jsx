@@ -19,10 +19,14 @@ function App() {
     setNewSearch(event.target.value)
   }
 
+  const handleClick = (country) => {
+    setNewSearch(country)
+  }
+
   return (
     <>
       <Filter search={newSearch} handle={handleSearchChange} />
-      <Countries countries={countries} search={newSearch} />
+      <Countries countries={countries} search={newSearch} handle={handleClick} />
     </>
   )
 }
