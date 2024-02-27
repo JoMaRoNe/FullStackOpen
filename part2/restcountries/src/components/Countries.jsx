@@ -7,16 +7,11 @@ const Countries = ({countries, search}) => {
     : countries.map((c) => {c.name.common})
 
     if (countriesToShow.length > 10) {
-        console.log(countriesToShow.length)
         return <p>Too many matches, specify another filter</p>
     
     } else if (countriesToShow.length === 1 ) {
-        console.log(countriesToShow)
         return (
-            <>
-            <p>Only one country.</p>
             <Country country={countriesToShow} />
-            </>
         )
     
     } else {
@@ -30,10 +25,6 @@ const Countries = ({countries, search}) => {
             </div>
         )
     }
-
-    /*return (
-        <p>{() => countriesToShow.map((c) => {c.name.common})}</p>
-    )*/
 }
 
 export default Countries

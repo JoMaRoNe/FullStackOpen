@@ -6,7 +6,6 @@ import countryService from './services/countries'
 function App() {
   const [newSearch, setNewSearch] = useState('')
   const [countries, setCountries] = useState([])
-  const [names, setNames] = useState('')
 
   useEffect(() => {
     countryService

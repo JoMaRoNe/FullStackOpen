@@ -1,5 +1,12 @@
 const Country = ({country}) => {
-    //const country = country.map((c) => )
+    const languages = country.map((c) => c.languages)
+    const valueLanguages = []
+
+    languages.forEach(element => {
+        const language = Object.values(element)
+        valueLanguages.push(...language)
+    })
+
     return (
         <>
             <h2>{country.map((c) => c.name.common)}</h2>
@@ -9,15 +16,13 @@ const Country = ({country}) => {
             <br />
             <h3>languages</h3>
             <ul>
-                {country.map((c) => {
-                    <li>
-                        c.languages
+                {valueLanguages.map((l) =>
+                    <li key={l}>
+                        {l}
                     </li> 
-                    })
-                }
+                )}
             </ul>
-            <img src={country.map((c) => c.flags.png)} />
-
+            <img alt={`${country.map((c) => c.name.common)} flag`} src={country.map((c) => c.flags.png)} />
         </>
 
     )
