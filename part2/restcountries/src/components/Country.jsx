@@ -1,4 +1,15 @@
+import { useState,useEffect } from 'react'
+import weatherService from '../services/countries'
+import Weather from "./Weather"
+
 const Country = ({country}) => {
+    const [weather, setWeather] = useState([])
+
+    const nameCountry = country.map((c) => c.name.common)
+    const capital = country.map((c) => c.capital)
+    const area = country.map((c) => c.area)
+    const flag = country.map((c) => c.flags.png)
+    
     const languages = country.map((c) => c.languages)
     const valueLanguages = []
 
@@ -7,12 +18,20 @@ const Country = ({country}) => {
         valueLanguages.push(...language)
     })
 
+    useEffect(() => { 
+        weatherService
+            .getWeather2(capital)
+            .then(weatherData => {
+                setWeather(weatherData)
+            })
+    },[])
+
     return (
         <>
-            <h2>{country.map((c) => c.name.common)}</h2>
+            <h2>{nameCountry}</h2>
             <br />
-            <p>capital {country.map((c) => c.capital)}</p>
-            <p>area {country.map((c) => c.area)}</p>
+            <p>capital {capital}</p>
+            <p>area {area}</p>
             <br />
             <h3>languages</h3>
             <ul>
@@ -22,9 +41,9 @@ const Country = ({country}) => {
                     </li> 
                 )}
             </ul>
-            <img alt={`${country.map((c) => c.name.common)} flag`} src={country.map((c) => c.flags.png)} />
+            <img alt={`${nameCountry} flag`} src={flag} />
+            <Weather weather={weather} />
         </>
-
     )
 } 
 export default Country

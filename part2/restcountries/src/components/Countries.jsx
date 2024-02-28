@@ -7,10 +7,14 @@ const Countries = ({countries, search, handle}) => {
     : countries.map((c) => {c.name.common})
 
     if (countriesToShow.length > 10) {
-        return <p>Too many matches, specify another filter</p>
+        if (search === '') {
+            return <></>
+        } else {
+            return <p>Too many matches, specify another filter</p>
+        }
     
     } else if (countriesToShow.length === 1 ) {
-        return (
+        return (   
             <Country country={countriesToShow} />
         )
     
@@ -18,11 +22,11 @@ const Countries = ({countries, search, handle}) => {
         return (
             <div>
                 {countriesToShow.map((c) =>
-                    <>
+                    <p key={c.name.common} >
                         {c.name.common}
                         <button onClick={() => handle(c.name.common)}>show</button>
                         <br />
-                    </>
+                    </p>
                 )}
             </div>
         )
