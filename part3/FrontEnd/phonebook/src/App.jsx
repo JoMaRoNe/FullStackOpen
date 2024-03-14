@@ -23,9 +23,10 @@ const App = () => {
     if (message === null) {
       return null
     }
-    
-    const setColor = message.includes('removed') ? 'red' : 'green'
-    
+    const setColor = (message.includes('removed') || message.includes('Error')) 
+      ? 'red'
+      : 'green' 
+
     const notificationStyle = {
       color: setColor,
       fontSize: 20,
@@ -84,12 +85,14 @@ const App = () => {
               setNewName('')
               setNewNumber('')
             })
+            .catch(error => {
+              setNotification(`Error: ${error.response.data.error}.`)
+            })
             setNotification(`Added ${personObject.name}`)
             setTimeout (() => { 
               setNotification(null)
             },5000)
   }
-
 
   const removePerson = (name,id) => {
       personService.remove(id)
